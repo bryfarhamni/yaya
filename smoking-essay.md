@@ -10,7 +10,7 @@ Smoking also affects reproduction and the next generation. In men it is linked t
 
 Other effects are often overlooked. Smoking weakens the immune system, upsets the normal bacteria of the mouth and throat, and makes people more vulnerable to infections such as oral candidiasis. It worsens gum disease, slows the healing of broken bones and raises the rate of infection after surgery. It is also linked to dry eye, glaucoma progression, reduced hearing function and a higher risk of Alzheimer's disease (Varghese & Muntode Gharde, 2023).
 
-Second-hand smoke spreads this harm to others. Passive smokers show raised markers of cardiovascular risk, such as C-reactive protein and fibrinogen. The cardiovascular effects of second-hand smoke appear quickly and come close to those of active smoking. Newer products are no safe escape either. Hookah and waterpipe smoke contain many of the same toxicants as cigarettes, and e-cigarettes harm both the lungs and the heart (Gordon et al., 2022; Echeagaray et al., 2022).
+Second-hand smoke spreads this harm to others. Passive smokers show raised markers of cardiovascular risk, such as C-reactive protein and fibrinogen. The cardiovascular effects of second-hand smoke appear quickly and come close to those of active smoking. Newer products are no safe escape either. Hookah and waterpipe smoke contain many of the same toxicants as cigarettes and harm the heart just as much. E-cigarettes also damage respiratory health, especially in teenagers with asthma (Varghese & Muntode Gharde, 2023).
 
 Because smoking harms so many organs, quitting is one of the most powerful steps a person can take for their health. Some of the damage can be reversed: the bacteria of the mouth return to normal and gum disease responds better to treatment after a person stops. Stronger public-health campaigns, firm enforcement of smoke-free laws and accessible cessation support can protect smokers and the people around them.
 
@@ -20,5 +20,3 @@ Because smoking harms so many organs, quitting is one of the most powerful steps
 
 1. Varghese, J., & Muntode Gharde, P. (2023). A comprehensive review on the impacts of smoking on the health of an individual. *Cureus, 15*(10), e46532. https://doi.org/10.7759/cureus.46532
 2. Kotlyarov, S. (2023). The role of smoking in the mechanisms of development of chronic obstructive pulmonary disease and atherosclerosis. *International Journal of Molecular Sciences, 24*(10), 8725. https://doi.org/10.3390/ijms24108725
-3. Gordon, T., Karey, E., Rebuli, M. E., Escobar, Y.-N. H., Jaspers, I., & Chen, L. C. (2022). E-cigarette toxicology. *Annual Review of Pharmacology and Toxicology, 62*, 301–322. https://doi.org/10.1146/annurev-pharmtox-042921-084202
-4. Echeagaray, O., Savko, C., Gallo, A., & Sussman, M. (2022). Cardiovascular consequences of vaping. *Current Opinion in Cardiology, 37*(3), 227–235. https://doi.org/10.1097/HCO.0000000000000952
