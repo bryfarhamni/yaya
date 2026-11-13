@@ -1,0 +1,13 @@
+{
+  "name": "yaya",
+  "owner": {
+    "name": "bryfarhamni"
+  },
+  "plugins": [
+    {
+      "name": "writer-plugin",
+      "source": "./writer-plugin",
+      "description": "Menulis dan menelaah artikel penelitian sesuai Format Penulisan Artikel Penelitian (FKUI)."
+    }
+  ]
+}

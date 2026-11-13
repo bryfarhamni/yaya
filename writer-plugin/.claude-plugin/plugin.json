@@ -1,0 +1,9 @@
+{
+  "name": "writer-plugin",
+  "version": "0.1.0",
+  "description": "Menulis dan menelaah artikel penelitian (IMRAD) sesuai Format Penulisan Artikel Penelitian (Saleha Sungkar, FKUI): judul, penulis, abstrak, pendahuluan, metode, hasil, pembahasan, simpulan, bilangan, statistik, dan tabel.",
+  "author": {
+    "name": "writer-plugin authors"
+  },
+  "keywords": ["writing", "research", "article", "imrad", "abstract", "bahasa-indonesia", "medical"]
+}
