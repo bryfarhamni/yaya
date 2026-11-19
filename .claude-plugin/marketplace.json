@@ -8,6 +8,11 @@
       "name": "writer-plugin",
       "source": "./writer-plugin",
       "description": "Menulis dan menelaah artikel penelitian sesuai Format Penulisan Artikel Penelitian (FKUI)."
+    },
+    {
+      "name": "presentation-plugin",
+      "source": "./presentation-plugin",
+      "description": "Menyusun tugas presentasi: kerangka berbasis riset, isi slide dengan catatan pembicara, dan telaah halusinasi serta gaya tulisan AI."
     }
   ]
 }

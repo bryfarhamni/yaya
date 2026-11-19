@@ -1,0 +1,9 @@
+{
+  "name": "presentation-plugin",
+  "version": "0.1.0",
+  "description": "Turns a presentation assignment brief (topic, length, language, rubric) into a researched outline, slide content with speaker notes, and a review for invented facts, broken citations, and AI-style writing.",
+  "author": {
+    "name": "presentation-plugin authors"
+  },
+  "keywords": ["presentation", "slides", "speaker-notes", "assignment", "research", "bahasa-indonesia", "medical"]
+}
