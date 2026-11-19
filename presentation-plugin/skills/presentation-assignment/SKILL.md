@@ -43,7 +43,7 @@ Show the outline before writing any slides. It is the first deliverable.
 
 - One line per slide: number, title, the one point it makes, sources, and seconds allotted. The times must add up to the length.
 - Map each rubric criterion to the slides that cover it, and flag any criterion that no slide covers.
-- Literature review structure (adapt to the topic and rubric): title → why it matters (burden, a hook) → definition and classification → epidemiology → etiology and risk factors → pathophysiology → clinical features and diagnosis → management or prevention → synthesis (what the sources agree and disagree on, gaps) → conclusion → references.
+- Literature review structure (adapt to the topic and rubric): title → why it matters (burden, a hook) → **conceptual framework flowchart** (exposure → mechanisms → outcomes, used as the map for the rest of the talk) → definition and classification → epidemiology → etiology and risk factors → pathophysiology → clinical features and diagnosis → management or prevention → synthesis (what the sources agree and disagree on, gaps) → conclusion → references.
 
 ## 4. Slides and speaker notes
 
@@ -62,6 +62,17 @@ Write each slide in this exact shape. `scripts/build_pptx.py` reads it.
 <What to say, in full spoken sentences, ~130 words per minute. It explains the bullets instead of reading them out, and ends with a transition to the next slide.>
 ```
 
+- Framework or process slides use a flow block instead of bullets. One chain per line; repeat a label to branch or merge. The builder lays it out left to right, with outcomes (boxes with no outgoing arrow) in the last column. Keep it to about 12 boxes and 5 columns, and short labels:
+
+  ````
+  ```flow
+  Cigarette smoke -> Oxidants and free radicals -> Airway inflammation -> COPD
+  Oxidants and free radicals -> Endothelial damage -> Atherosclerosis -> Coronary heart disease
+  Cigarette smoke -> Nicotine -> Atherosclerosis
+  ```
+  ````
+
+  Each box on the framework should be explained by a later slide, and the notes should walk the chart from left to right.
 - Slide 1 is the title slide: its bullets become subtitle lines (presenter, course, date).
 - 3–5 bullets per slide, no full sentences, one idea per slide.
 - Citations: Vancouver superscript numbers right after the fact, `<sup>1</sup>` or `<sup>1,3</sup>` or `<sup>2–4</sup>`, numbered in order of first use and reused when a source is cited again.
