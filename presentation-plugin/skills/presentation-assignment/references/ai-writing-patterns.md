@@ -1,6 +1,6 @@
 # AI writing patterns to remove
 
-Lecturers notice these. Each item lists what to look for and what to do instead. Flag a pattern only when it actually appears; one occurrence of a common word is not a problem, repetition is.
+Lecturers notice these. Each item lists what to look for and what to do instead. English first; Bahasa Indonesia equivalents are included for Indonesian-language decks. Flag a pattern only when it actually appears; one occurrence of a common word is not a problem, repetition is.
 
 ## Words and phrases
 

@@ -1,23 +1,30 @@
 # presentation-plugin
 
-A Claude Code plugin for presentation assignments. Give it the brief (topic, length, language, rubric) and it produces a researched outline, slide content with speaker notes, and a review that checks for invented facts, citations that don't exist, and AI-style writing.
+A Claude Code plugin for presentation assignments. Give it the brief (topic, length, language, rubric) and it produces a researched outline, slides with speaker notes, a review for invented facts, wrong references, and AI-style writing, and an editable PowerPoint file.
+
+Defaults: English, literature review, textbooks as main sources, Vancouver superscript citations, .pptx output. The brief can change any of them.
 
 ## Contents
 
 | Type | Name | Purpose |
 |---|---|---|
-| Skill | `presentation-assignment` | The workflow: brief → research → outline → slides and notes → review |
-| Command | `/make-presentation [brief file or topic]` | Runs the whole workflow and saves `presentasi-<topik>.md` |
-| Command | `/review-presentation <file> [rubric]` | Reviews an existing presentation |
-| Agent | `presentation-reviewer` | Read-only reviewer: verifies citations and claims, flags AI patterns, checks rubric and timing |
+| Skill | `presentation-assignment` | The workflow: brief → research → outline → slides and notes → review → .pptx |
+| Command | `/make-presentation [brief file or topic]` | Runs the whole workflow |
+| Command | `/review-presentation <file> [rubric]` | Reviews an existing .md or .pptx presentation |
+| Agent | `presentation-reviewer` | Read-only: verifies books, articles, and claims; flags AI patterns; checks rubric and timing |
+| Script | `scripts/build_pptx.py` | Turns the slide Markdown into a .pptx with speaker notes and real superscript citations |
 
 References in `skills/presentation-assignment/references/`:
-- `brief-template.md`: the brief to fill in, and a default rubric
-- `ai-writing-patterns.md`: patterns the reviewer flags, in English and Bahasa Indonesia
+- `brief-template.md`: the brief to fill in
+- `rubric.md`: the default rubric (edit it to match your course)
+- `ai-writing-patterns.md`: patterns the reviewer flags
 
-## Output shape
+## Building a deck by hand
 
-Each slide comes as a title, 3–5 short bullets, a visual suggestion, its sources, and timed speaker notes, followed by a numbered reference list and five likely Q&A questions with answers. Paste it into PowerPoint, Google Slides, Canva, or Gamma.
+```
+pip install python-pptx
+python3 presentation-plugin/scripts/build_pptx.py presentation-topic.md [out.pptx] [--template my-template.pptx]
+```
 
 ## Installation
 
