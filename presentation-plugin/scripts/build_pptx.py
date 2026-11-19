@@ -14,6 +14,13 @@ Inside a section:
     one chain per line, e.g. "Smoking -> Oxidative stress -> COPD"; repeat a label to branch or merge
   - "**Photo:** what to insert | source"  an empty, labelled photo slot on the right (bullets shrink to
     the left) with a caption underneath; up to two per slide; a slide with no bullets gets a large slot
+  - "**Big:** text"        hook text in the middle of the slide: the first Big line is huge (a number or a
+    short question), later ones are a smaller line under it
+  - a ```chart fenced block draws an editable PowerPoint chart instead of bullets:
+        type: column        (column | bar | line | pie; default column)
+        title: Deaths per year (millions)
+        series: Men, Women  (optional; one name per value column)
+        Label A: 12.5       (one category per line; "Label: v1, v2" for several series)
 Slide 1 uses the title layout: its bullets become subtitle lines.
 Needs python-pptx (pip install python-pptx).
 """
@@ -22,15 +29,18 @@ import sys
 
 from pptx import Presentation
 from pptx.oxml.ns import qn
+from pptx.chart.data import CategoryChartData
 from pptx.dml.color import RGBColor
+from pptx.enum.chart import XL_CHART_TYPE
 from pptx.enum.dml import MSO_LINE
 from pptx.enum.shapes import MSO_CONNECTOR, MSO_SHAPE
-from pptx.enum.text import PP_ALIGN
+from pptx.enum.text import MSO_AUTO_SIZE, PP_ALIGN
 from pptx.util import Emu, Inches, Pt
 
 SLIDE_RE = re.compile(r"^##\s+Slide\s+\d+\s*[:.\-]\s*(.+?)\s*$", re.I)
 NOTES_RE = re.compile(r"^\*\*(Notes|Speaker notes|Catatan pembicara)\b.*?\*\*\s*(.*)$", re.I)
 PHOTO_RE = re.compile(r"^\*\*(Photo|Figure|Image|Gambar):?\*\*:?\s*(.*)$", re.I)
+BIG_RE = re.compile(r"^\*\*Big:?\*\*:?\s*(.*)$", re.I)
 VISUAL_RE = re.compile(r"^\*\*Visual:?\*\*:?\s*(.*)$", re.I)
 SOURCES_RE = re.compile(r"^\*\*(Sources?|Sumber):?\*\*", re.I)
 BULLET_RE = re.compile(r"^\s*[-*]\s+(.*)$")
@@ -40,13 +50,13 @@ INLINE_RE = re.compile(r"(<sup>.*?</sup>|\*\*.+?\*\*|\*[^*]+?\*)")
 
 
 def parse(md):
-    slides, cur, in_notes, in_flow = [], None, False, False
+    slides, cur, in_notes, in_flow, in_chart = [], None, False, False, False
     for line in md.splitlines():
         m = SLIDE_RE.match(line)
         if m:
-            cur = {"title": m.group(1), "body": [], "notes": [], "visual": "", "flow": [], "photos": []}
+            cur = {"title": m.group(1), "body": [], "notes": [], "visual": "", "flow": [], "photos": [], "big": [], "chart": []}
             slides.append(cur)
-            in_notes = in_flow = False
+            in_notes = in_flow = in_chart = False
             continue
         if cur is None:
             continue
@@ -59,6 +69,15 @@ def parse(md):
             elif "->" in line:
                 cur["flow"].append([n.strip() for n in line.split("->") if n.strip()])
             continue
+        if in_chart:
+            if line.strip().startswith("```"):
+                in_chart = False
+            elif ":" in line:
+                cur["chart"].append(line.strip())
+            continue
+        if line.strip().startswith("```chart"):
+            in_chart = True
+            continue
         if line.strip().startswith("```flow"):
             in_flow = True
             continue
@@ -69,6 +88,8 @@ def parse(md):
             in_notes = True
             if m.group(2):
                 cur["notes"].append(m.group(2))
+        elif (m := BIG_RE.match(line)):
+            cur["big"].append(m.group(1).strip())
         elif (m := PHOTO_RE.match(line)):
             what, _, source = m.group(2).partition("|")
             cur["photos"].append((what.strip(), source.strip()))
@@ -149,7 +170,7 @@ def draw_flow(slide, prs, chains):
     width, height = prs.slide_width - Inches(0.8), prs.slide_height - Inches(2.0)
     colw = width / len(cols)
     rowh = height / max(len(c) for c in cols)
-    bw, bh = int(min(Inches(2.4), colw * 0.72)), int(min(Inches(1.0), rowh * 0.72))
+    bw, bh = int(min(Inches(2.4), colw * 0.8)), int(min(Inches(1.0), rowh * 0.72))
     boxes = {}
     for c, col in enumerate(cols):
         for i, n in enumerate(col):
@@ -161,7 +182,7 @@ def draw_flow(slide, prs, chains):
             tf.word_wrap = True
             add_runs(tf.paragraphs[0], n)
             for r in tf.paragraphs[0].runs:
-                r.font.size = Pt(16 if len(cols) <= 4 else 14)
+                r.font.size = Pt(20 if len(cols) <= 4 else 17)
             boxes[n] = box
     for a, b in edges:
         line = slide.shapes.add_connector(MSO_CONNECTOR.STRAIGHT, 0, 0, 0, 0)
@@ -200,14 +221,72 @@ def draw_photo_slots(slide, prs, photos, full):
         for p in tf.paragraphs:
             p.alignment = PP_ALIGN.CENTER
             for r in p.runs:
-                r.font.size, r.font.italic = Pt(14), True
+                r.font.size, r.font.italic = Pt(16), True
                 r.font.color.rgb = RGBColor(0x77, 0x77, 0x77)
         cap = slide.shapes.add_textbox(Emu(int(left)), Emu(int(y + slot_h + Inches(0.05))), Emu(int(width)), Inches(0.6))
         cap.name = "Photo caption"
         cap.text_frame.word_wrap = True
         add_runs(cap.text_frame.paragraphs[0], f"{what}." + (f" Source: {source}" if source else ""))
         for r in cap.text_frame.paragraphs[0].runs:
-            r.font.size = Pt(12)
+            r.font.size = Pt(14)
+
+
+def draw_big(slide, prs, lines):
+    """Hook text: one huge line (a number or question) and smaller lines under it, centred."""
+    box = slide.shapes.add_textbox(Inches(0.8), Inches(1.9), prs.slide_width - Inches(1.6), prs.slide_height - Inches(2.6))
+    box.name = "Hook"
+    tf = box.text_frame
+    tf.word_wrap = True
+    for i, line in enumerate(lines):
+        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+        p.alignment = PP_ALIGN.CENTER
+        add_runs(p, line)
+        for r in p.runs:
+            r.font.size = Pt(80 if i == 0 and len(line) <= 20 else 44 if i == 0 else 28)
+            r.font.bold = True if i == 0 else r.font.bold
+
+
+CHART_TYPES = {"column": XL_CHART_TYPE.COLUMN_CLUSTERED, "bar": XL_CHART_TYPE.BAR_CLUSTERED,
+               "line": XL_CHART_TYPE.LINE_MARKERS, "pie": XL_CHART_TYPE.PIE}
+
+
+def parse_chart(lines):
+    opts, cats, rows = {}, [], []
+    for line in lines:
+        key, _, val = line.partition(":")
+        if key.strip().lower() in ("type", "title", "series"):
+            opts[key.strip().lower()] = val.strip()
+        else:
+            cats.append(key.strip())
+            rows.append([float(v.replace(",", ".").strip().rstrip("%")) for v in val.split(";" if ";" in val else ",")])
+    names = [n.strip() for n in opts.get("series", "").split(",") if n.strip()] or ["Value"]
+    series = [(names[j] if j < len(names) else f"Series {j + 1}", [r[j] for r in rows]) for j in range(len(rows[0]))]
+    return opts, cats, series
+
+
+def draw_chart(slide, prs, lines, full=True):
+    opts, cats, series = parse_chart(lines)
+    data = CategoryChartData()
+    data.categories = cats
+    for name, values in series:
+        data.add_series(name, values)
+    kind = CHART_TYPES.get(opts.get("type", "column").lower(), XL_CHART_TYPE.COLUMN_CLUSTERED)
+    left = Inches(0.8) if full else int(prs.slide_width * 0.56)
+    width = prs.slide_width - Inches(0.8) - left
+    chart = slide.shapes.add_chart(kind, left, Inches(1.7), width, prs.slide_height - Inches(2.0), data).chart
+    chart.font.size = Pt(18)
+    chart.has_legend = len(series) > 1 or kind == XL_CHART_TYPE.PIE
+    if chart.has_legend:
+        chart.legend.include_in_layout = False
+    if opts.get("title"):
+        chart.has_title = True
+        chart.chart_title.text_frame.text = opts["title"]
+        chart.chart_title.text_frame.paragraphs[0].runs[0].font.size = Pt(20)
+    else:
+        chart.has_title = False
+    if kind != XL_CHART_TYPE.PIE:
+        chart.plots[0].has_data_labels = True
+        chart.plots[0].data_labels.font.size = Pt(18)
 
 
 def place_16x9(slide, is_title):
@@ -225,19 +304,27 @@ def build(slides, out, template=None):
     title_layout, content_layout = prs.slide_layouts[0], prs.slide_layouts[1]
     for i, s in enumerate(slides):
         is_title = i == 0
-        layout = title_layout if is_title else prs.slide_layouts[5] if s["flow"] else content_layout
+        title_only = s["flow"] or s["big"] or (s["chart"] and not s["body"])
+        layout = title_layout if is_title else prs.slide_layouts[5] if title_only else content_layout
         slide = prs.slides.add_slide(layout)
         if not template:
             place_16x9(slide, is_title)
         fill(slide.shapes.title.text_frame, [s["title"]])
+        if s["big"] and not is_title:
+            draw_big(slide, prs, s["big"])
+        if s["chart"] and not is_title:
+            draw_chart(slide, prs, s["chart"], full=not s["body"])
+            if s["body"] and len(slide.placeholders) > 1:
+                s["photos"] = []  # the chart takes the right-hand column
         if s["flow"]:
             draw_flow(slide, prs, s["flow"])
         elif s["body"] and len(slide.placeholders) > 1:
             is_refs = re.match(r"(references|daftar pustaka|bibliography)", s["title"], re.I)
             body = slide.placeholders[1]
-            fill(body.text_frame, s["body"], 16 if is_refs else None)
-            if s["photos"]:
+            fill(body.text_frame, s["body"], 18 if is_refs else None)
+            if s["photos"] or s["chart"]:
                 body.width = int(prs.slide_width * 0.53) - body.left
+                body.text_frame.auto_size = MSO_AUTO_SIZE.NONE  # stop shrink-to-fit going under 24pt
                 for p in body.text_frame.paragraphs:
                     for r in p.runs:
                         r.font.size = r.font.size or Pt(24)

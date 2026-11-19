@@ -25,16 +25,27 @@ Smoking -> Oxidative stress -> COPD
 Smoking -> Atherosclerosis
 Oxidative stress -> Atherosclerosis
 ```
-## Slide 4: References
+## Slide 4: Hook
+**Big:** 8 million
+**Big:** deaths a year<sup>1</sup>
+## Slide 5: Chart
+```chart
+type: bar
+title: Test
+series: A, B
+X: 1, 2
+Y: 3,5; 4
+```
+## Slide 6: References
 1. Ref one.
 # Q&A prep
 - not a slide
 """
 
 slides = parse(MD)
-assert [s["title"] for s in slides] == ["Title", "Point", "Framework", "References"], slides
+assert [s["title"] for s in slides] == ["Title", "Point", "Framework", "Hook", "Chart", "References"], slides
 assert slides[1]["notes"] == "Line one.\nLine two." and slides[1]["visual"] == "chart"
-assert slides[3]["body"] == ["1. Ref one."]
+assert slides[5]["body"] == ["1. Ref one."]
 assert len(slides[2]["flow"]) == 3 and not slides[2]["body"]
 cols, edges = flow_layout(slides[2]["flow"])
 assert cols == [["Smoking"], ["Oxidative stress"], ["COPD", "Atherosclerosis"]] and len(edges) == 4, cols
@@ -58,4 +69,7 @@ body = prs.slides[1].placeholders[1]
 cap = next(sh for sh in prs.slides[1].shapes if sh.name == "Photo caption").text_frame.text
 assert "check in book" not in cap and "check in your book" in prs.slides[1].notes_slide.notes_text_frame.text.lower()
 assert body.left + body.width <= prs.slide_width * 0.56  # bullets moved left of the slot
+assert any(sh.name == "Hook" and sh.text_frame.text.startswith("8 million") for sh in prs.slides[3].shapes)
+chart = next(sh for sh in prs.slides[4].shapes if sh.has_chart).chart
+assert [s.name for s in chart.plots[0].series] == ["A", "B"] and list(chart.plots[0].series[1].values) == [2.0, 4.0]
 print("ok")
