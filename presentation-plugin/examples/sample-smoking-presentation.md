@@ -1,29 +1,45 @@
 # Sample: Health Effects of Smoking (literature review, 10 minutes)
 
+Flow: Introduction (why it happens + foundation) → questions → body answering each question, grouped by organ system and explained from general to specific → short key takeaways → references.
+
 ## Slide 1: Health Effects of Smoking: A Literature Review
 
 - Ena
 - Literature review presentation
 - November 2026
 
-**Visual:** none
+**Notes (~10 s):**
+Good morning. My topic is how smoking damages health.
 
-**Notes (~15 s):**
-Good morning. My topic is how smoking damages health. I'll start with how big the problem is, then walk through one framework that links smoke to disease, and use it to go organ by organ.
-
-## Slide 2: Tobacco kills about 8 million people every year
+## Slide 2: Why this matters: tobacco kills about 8 million people a year
 
 - About 1.3 billion people smoke<sup>1</sup>
 - Roughly 8 million deaths a year<sup>1</sup>
 - Damages almost every organ system<sup>2</sup>
 - Harms people who do not smoke<sup>2</sup>
 
-**Visual:** one large number "8 million" with a small world map
+**Notes (~40 s):**
+Smoking is still one of the largest preventable causes of death. Around 1.3 billion people smoke, and tobacco causes roughly 8 million deaths a year. The damage isn't limited to the lungs: the reviews I read describe effects on the heart, reproduction, immunity, bones, and even on people who never smoke. So why does one habit cause so much harm? To answer that, we first need a few basic concepts.
+
+## Slide 3: Why it happens: smoke delivers three groups of harmful agents
+
+- Oxidants and free radicals<sup>1</sup>
+- Nicotine, which acts on blood vessels<sup>2</sup>
+- Tar and carcinogens that build up in the lungs<sup>2</sup>
+- Oxidative stress: oxidants exceed antioxidant defences<sup>1</sup>
 
 **Notes (~45 s):**
-Smoking is still one of the largest preventable causes of death. Around 1.3 billion people smoke, and tobacco causes roughly 8 million deaths a year. Most people think of the lungs first, but the reviews I read describe damage to the heart and vessels, reproduction, the immune system, the eyes and ears, and bone healing. And it reaches people who never light a cigarette, through second-hand smoke. So the question for this review is: how does one exposure cause so many different diseases? The next slide is the framework I'll use to answer that.
+Cigarette smoke carries thousands of chemicals, but for this talk three groups matter. First, oxidants and free radicals. Second, nicotine, which acts directly on the blood vessels. Third, tar and carcinogens, which settle in lung tissue. One term comes up again and again: oxidative stress. It means the oxidants coming in are more than the body's antioxidant defences can neutralise, so they start damaging cells. Keep that term in mind, because it links almost everything that follows.
 
-## Slide 3: Conceptual framework: from smoke to disease
+## Slide 4: Foundation: the normal lung and artery wall
+
+**Photo:** Normal alveoli and the alveolar-capillary membrane | Guyton and Hall, respiratory physiology chapters<sup>3</sup> [check in book]
+**Photo:** Layers of a normal artery wall, with the endothelium labelled | Robbins, chapter on blood vessels<sup>4</sup> [check in book]
+
+**Notes (~45 s):**
+Before looking at damage, here is what normal looks like. On top is the alveolus, where thin walls and a large surface area let oxygen pass into the blood. Remember how thin and delicate these walls are. Below is a normal artery wall. The layer to notice is the innermost one, the endothelium. It is a single layer of cells that keeps the vessel smooth and controls inflammation and clotting. Smoking damages both of these structures, and that is the core of the next slides.
+
+## Slide 5: Foundation: one shared pathway, many diseases
 
 ```flow
 Cigarette smoke -> Oxidants and free radicals -> Airway inflammation -> COPD and emphysema
@@ -33,83 +49,83 @@ Cigarette smoke -> Nicotine -> Atherosclerosis
 Cigarette smoke -> Tar and carcinogens -> Lung cancer
 ```
 
-**Visual:** flowchart (drawn by the builder)
+**Notes (~45 s):**
+This map ties the basic concepts together. Read it left to right: the agents in smoke, then the mechanisms, then the diseases. The important part is the middle. Oxidative stress inflames the airways and also damages the endothelium, so lung disease and heart disease share the same roots. I'll use this map to answer four questions.
 
-**Notes (~75 s):**
-Read this from left to right. On the left is the exposure, cigarette smoke. It carries thousands of chemicals, and three groups matter most here. Oxidants and free radicals overwhelm the body's antioxidant defences. Nicotine acts directly on the blood vessels. Tar and carcinogens build up in lung tissue.
-In the middle are the mechanisms. Oxidative stress inflames the airways, and it also damages the endothelium, the inner lining of the blood vessels. That damage, together with nicotine, speeds up atherosclerosis.
-On the right are the diseases. Airway inflammation leads to COPD and emphysema. Atherosclerosis leads to coronary heart disease, stroke and peripheral artery disease. Carcinogens lead to lung cancer.
-The key point is in the middle column: the lung and heart diseases share the same mechanisms. That is why Kotlyarov describes COPD and atherosclerosis as closely linked. I'll now follow each branch.
+## Slide 6: Four questions this review answers
 
-## Slide 4: The lungs are exposed first and damaged most
+- 1. How does smoking damage the lungs?
+- 2. How does it damage the heart and blood vessels?
+- 3. Which other organs, and which other people, are affected?
+- 4. Can the damage be reversed?
 
-- Oxidants overwhelm antioxidant defences<sup>1</sup>
-- COPD, emphysema, fibrosis, lung cancer<sup>2</sup>
+**Notes (~25 s):**
+I've ordered these by organ system, starting where the smoke enters, the lungs, then moving to the vessels, then to the rest of the body and to other people. The last question looks at what happens when someone stops.
+
+## Slide 7: Q1. Smoking inflames and permanently scars the lungs
+
+- Oxidants overwhelm the lung's defences<sup>1</sup>
+- Result: COPD, emphysema, fibrosis, lung cancer<sup>2</sup>
 - Respiratory bronchiolitis in almost every smoker<sup>2</sup>
-- COPD: persistent, progressive airflow limitation<sup>3</sup>
+- COPD: persistent, progressive airflow limitation<sup>5</sup>
 
-**Visual:** normal alveoli next to emphysematous alveoli
+**Photo:** Emphysema: destroyed alveolar walls compared with normal lung | Robbins, chapter on the lung<sup>4</sup> [check in book]
 
 **Notes (~60 s):**
-This is the top branch of the framework. The lungs meet the smoke first. Kotlyarov explains that oxidants and free radicals in smoke overwhelm the lung's antioxidant defences, and the result is ongoing inflammation. Varghese and Muntode Gharde list the diseases this leads to: COPD, emphysema, asthma, lung fibrosis, interstitial lung disease and lung cancer. Almost every smoker develops some respiratory bronchiolitis. Harrison's defines COPD by airflow limitation that persists and gets worse over time [check in book: chapter on COPD]. Over years, tar and toxins permanently change the structure of the lung, which is why much of this damage cannot be reversed. Next, the second branch: the blood vessels.
+The short answer: smoking keeps the lungs inflamed until their structure changes for good. The lungs meet the smoke first, and the oxidants overwhelm their antioxidant defences, so inflammation never settles. Over years this leads to COPD, emphysema, asthma, fibrosis and lung cancer. Almost every smoker has some respiratory bronchiolitis. Harrison's defines COPD by airflow limitation that persists and gets worse over time. The picture shows why: in emphysema, the thin alveolar walls we saw earlier are destroyed, so the surface for gas exchange shrinks. That damage is permanent.
 
-## Slide 5: Smoking drives atherosclerosis through the same pathways
+## Slide 8: Q2. Smoking speeds up atherosclerosis through the same pathways
 
 - Nicotine speeds up arterial plaque formation<sup>2</sup>
 - Shared pathways: inflammation, oxidative stress, endothelial damage<sup>1</sup>
 - Leads to coronary disease, stroke, PAD<sup>1,2</sup>
 - Up to 80% of PAD patients smoke or smoked<sup>1</sup>
 
-**Visual:** artery cross-section showing plaque build-up
+**Photo:** Atherosclerotic plaque in a coronary artery | Robbins, chapter on blood vessels<sup>4</sup> [check in book]
 
 **Notes (~60 s):**
-The middle branch explains the heart and vessels. Nicotine speeds up atherosclerosis, the build-up of fatty plaque in artery walls. Kotlyarov's review argues that this happens through the same three processes we saw in the lung: systemic inflammation, oxidative stress, and damage to the endothelium. This is the main synthesis point from my sources. One review comes from the lung side and one from the whole-body side, but both point to shared mechanisms. Atherosclerosis then causes coronary heart disease, ischaemic stroke and peripheral artery disease. The link is strong: up to 80% of patients with peripheral artery disease are current or former smokers. Smoking also makes high blood pressure worse.
+The short answer: smoking damages the endothelium, and that starts plaque build-up. Nicotine speeds up atherosclerosis directly. Kotlyarov shows it also happens through the same three processes we saw in the lung: systemic inflammation, oxidative stress and endothelial damage. That is where my two main sources agree: one starts from the lung, the other from the whole body, and both arrive at shared mechanisms. The plaque narrows arteries and leads to coronary heart disease, ischaemic stroke and peripheral artery disease. Up to 80% of patients with peripheral artery disease are current or former smokers.
 
-## Slide 6: The damage reaches other organs and other people
+## Slide 9: Q3. The damage reaches other organs and other people
 
 - Reproduction: erectile dysfunction, fertility, low birth weight<sup>2</sup>
 - Weaker immunity, gum disease, slower bone healing<sup>2</sup>
 - Second-hand smoke raises CRP and fibrinogen<sup>2</sup>
 - Hookah and e-cigarettes are not safe alternatives<sup>2</sup>
 
-**Visual:** body outline with the affected organs marked
+**Notes (~55 s):**
+The short answer: almost every system, and people nearby too. In men, smoking is linked to erectile dysfunction, and the risk rises with the amount smoked. In women it disrupts hormones and fertility, and in pregnancy it restricts fetal growth and lowers birth weight. It weakens immunity, worsens gum disease and slows fracture healing. Passive smokers show higher C-reactive protein and fibrinogen, markers of cardiovascular risk, and these effects appear quickly. Hookah smoke carries many of the same toxicants, and e-cigarettes harm the airways of teenagers with asthma.
 
-**Notes (~60 s):**
-Outside the framework's main branches, Varghese and Muntode Gharde describe effects in almost every system. In men, smoking is linked to erectile dysfunction, and the risk rises with the amount smoked. In women it disrupts hormones and fertility, and in pregnancy it restricts fetal growth and lowers birth weight. It weakens immunity, worsens gum disease and slows the healing of fractures.
-It also affects people around the smoker. Passive smokers show higher C-reactive protein and fibrinogen, which are markers of cardiovascular risk, and these effects appear quickly. Hookah smoke carries many of the same toxicants, and e-cigarettes harm the respiratory health of teenagers with asthma.
+## Slide 10: Q4. Quitting reverses part of the damage, not all
 
-## Slide 7: What the sources agree on, and what is missing
-
-- Agree: shared mechanisms link lung and vessel disease<sup>1,2</sup>
-- Agree: quitting reverses part of the damage<sup>2</sup>
-- Gap: both are narrative reviews, not systematic
-- Gap: little data from Indonesia in these sources
-
-**Visual:** two-column table, "Agree" and "Gaps"
-
-**Notes (~50 s):**
-Putting the sources side by side: both reviews agree that smoking's effects on the lung and the vessels come from the same mechanisms. They also agree that stopping helps. After quitting, the normal bacteria of the mouth come back and gum disease responds better to treatment. There are gaps. Both articles are narrative reviews, so they don't pool data the way a systematic review does. Neither reports Indonesian data, and smoking rates here are high, so local studies would make this review stronger.
-
-## Slide 8: Conclusion: one exposure, shared mechanisms, many diseases
-
-- Smoke triggers oxidative stress and inflammation<sup>1</sup>
-- These pathways cause both COPD and atherosclerosis<sup>1</sup>
-- Damage extends to non-smokers<sup>2</sup>
-- Quitting gives real, partial protection<sup>2</sup>
-
-**Visual:** small copy of the framework from slide 3
+- Strong protection against many of these diseases<sup>2</sup>
+- Oral bacteria recover; gum disease responds better<sup>2</sup>
+- Long-term structural lung damage stays<sup>2</sup>
 
 **Notes (~35 s):**
-To answer the question I started with: smoking causes so many diseases because a few shared mechanisms, mainly oxidative stress, inflammation and endothelial damage, act on many organs at once. That explains why lung and heart disease so often appear together in smokers. Second-hand smoke spreads the harm to others, and quitting reverses part of it. Thank you, I'm happy to take questions.
+The short answer: partly. Stopping smoking gives strong protection against many of the diseases we covered. Some changes reverse: the normal bacteria of the mouth come back, and gum disease responds better to treatment. But the structural changes in the lung, like the destroyed alveolar walls, do not grow back. That is why stopping early matters most.
 
-## Slide 9: References
+## Slide 11: Key takeaways
+
+- Smoke causes oxidative stress and chronic inflammation
+- Lungs: inflammation leads to permanent damage
+- Vessels: the same pathways drive atherosclerosis
+- The harm spreads to other organs and other people
+- Quitting helps, and earlier is better
+
+**Notes (~25 s):**
+To sum up: one exposure, a few shared mechanisms, many diseases. Thank you, I'm happy to take questions.
+
+## Slide 12: References
 
 1. Kotlyarov S. The role of smoking in the mechanisms of development of chronic obstructive pulmonary disease and atherosclerosis. Int J Mol Sci. 2023;24(10):8725. doi:10.3390/ijms24108725
 2. Varghese J, Muntode Gharde P. A comprehensive review on the impacts of smoking on the health of an individual. Cureus. 2023;15(10):e46532. doi:10.7759/cureus.46532
-3. Loscalzo J, Fauci AS, Kasper DL, Hauser SL, Longo DL, Jameson JL, editors. Harrison's principles of internal medicine. 21st ed. New York: McGraw Hill; 2022.
+3. Hall JE, Hall ME. Guyton and Hall textbook of medical physiology. 14th ed. Philadelphia: Elsevier; 2021.
+4. Kumar V, Abbas AK, Aster JC, editors. Robbins & Cotran pathologic basis of disease. 10th ed. Philadelphia: Elsevier; 2021.
+5. Loscalzo J, Fauci AS, Kasper DL, Hauser SL, Longo DL, Jameson JL, editors. Harrison's principles of internal medicine. 21st ed. New York: McGraw Hill; 2022.
 
 **Notes:**
-Reference 3 is included to show the textbook format. Confirm the COPD chapter and page in your own copy before using it.
+Add chapter and page numbers for the textbook figures once you've chosen them from your copy.
 
 # Q&A prep
 
@@ -117,12 +133,14 @@ Reference 3 is included to show the textbook format. Confirm the COPD chapter an
 2. **Is second-hand smoke really as harmful?** Its cardiovascular effects appear quickly and come close to those of active smoking.<sup>2</sup>
 3. **Are e-cigarettes safer?** The review reports harm to the respiratory health of teenagers with asthma, so they are not harmless.<sup>2</sup>
 4. **Can the damage be reversed?** Partly. Oral bacteria recover and gum disease responds better after quitting, but structural lung damage is permanent.<sup>2</sup>
-5. **What are the limits of your sources?** Both are narrative reviews without Indonesian data.
+5. **What are the limits of your sources?** The two articles are narrative reviews, not systematic reviews, and neither reports Indonesian data.
 
 # Sources table
 
 | # | Source | Facts used |
 |---|---|---|
 | 1 | Kotlyarov 2023, Int J Mol Sci | 1.3 billion smokers; ~8 million deaths/year; oxidants overwhelm antioxidant defences; COPD and atherosclerosis share inflammation, oxidative stress, endothelial damage; up to 80% of PAD patients are current/former smokers |
-| 2 | Varghese and Muntode Gharde 2023, Cureus | List of respiratory diseases; respiratory bronchiolitis; nicotine and atherosclerosis; hypertension; reproductive, immune, dental, bone effects; second-hand smoke CRP/fibrinogen; hookah; e-cigarettes in asthmatic teens; recovery after quitting |
-| 3 | Harrison's 21st ed., 2022 | COPD definition [check in book] |
+| 2 | Varghese and Muntode Gharde 2023, Cureus | Nicotine and atherosclerosis; tar in the lungs; respiratory diseases; respiratory bronchiolitis; reproductive, immune, dental, bone effects; second-hand smoke CRP/fibrinogen; hookah; e-cigarettes; benefits of quitting |
+| 3 | Guyton and Hall, 14th ed. | Normal alveolar structure figure [check in book] |
+| 4 | Robbins, 10th ed. | Normal artery wall, emphysema, and plaque figures [check in book] |
+| 5 | Harrison's, 21st ed. | COPD definition [check in book] |

@@ -12,7 +12,7 @@ Defaults: English, literature review, textbooks as main sources, Vancouver super
 | Command | `/make-presentation [brief file or topic]` | Runs the whole workflow |
 | Command | `/review-presentation <file> [rubric]` | Reviews an existing .md or .pptx presentation |
 | Agent | `presentation-reviewer` | Read-only: verifies books, articles, and claims; flags AI patterns; checks rubric and timing |
-| Script | `scripts/build_pptx.py` | Turns the slide Markdown into a 16:9 .pptx with speaker notes, real superscript citations, and editable flowcharts for framework slides |
+| Script | `scripts/build_pptx.py` | Turns the slide Markdown into a 16:9 .pptx with speaker notes, real superscript citations, and editable flowcharts for framework slides, and labelled photo slots for book figures |
 
 An example deck is in `examples/sample-smoking-presentation.md`.
 

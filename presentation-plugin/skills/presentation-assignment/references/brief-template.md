@@ -5,6 +5,7 @@ Copy, fill in, and pass to `/make-presentation`. Leave a line blank to use the d
 ```
 Topic / title:
 Assignment wording from the lecturer (copy exactly):
+Questions to answer (from the lecturer, if any):
 Type: literature review | journal reading | case report | group project
 Length (minutes):
 Q&A time (minutes):

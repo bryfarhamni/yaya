@@ -12,6 +12,8 @@ Inside a section:
   - <sup>1,3</sup>        real superscript (Vancouver citations); *text* italic; **text** bold
   - a ```flow fenced block draws a left-to-right flowchart (boxes + arrows) instead of bullets;
     one chain per line, e.g. "Smoking -> Oxidative stress -> COPD"; repeat a label to branch or merge
+  - "**Photo:** what to insert | source"  an empty, labelled photo slot on the right (bullets shrink to
+    the left) with a caption underneath; up to two per slide; a slide with no bullets gets a large slot
 Slide 1 uses the title layout: its bullets become subtitle lines.
 Needs python-pptx (pip install python-pptx).
 """
@@ -20,15 +22,20 @@ import sys
 
 from pptx import Presentation
 from pptx.oxml.ns import qn
+from pptx.dml.color import RGBColor
+from pptx.enum.dml import MSO_LINE
 from pptx.enum.shapes import MSO_CONNECTOR, MSO_SHAPE
+from pptx.enum.text import PP_ALIGN
 from pptx.util import Emu, Inches, Pt
 
 SLIDE_RE = re.compile(r"^##\s+Slide\s+\d+\s*[:.\-]\s*(.+?)\s*$", re.I)
 NOTES_RE = re.compile(r"^\*\*(Notes|Speaker notes|Catatan pembicara)\b.*?\*\*\s*(.*)$", re.I)
+PHOTO_RE = re.compile(r"^\*\*(Photo|Figure|Image|Gambar):?\*\*:?\s*(.*)$", re.I)
 VISUAL_RE = re.compile(r"^\*\*Visual:?\*\*:?\s*(.*)$", re.I)
 SOURCES_RE = re.compile(r"^\*\*(Sources?|Sumber):?\*\*", re.I)
 BULLET_RE = re.compile(r"^\s*[-*]\s+(.*)$")
 NUMBERED_RE = re.compile(r"^\s*(\d+\.\s+.*)$")
+CHECK = "[check in book]"
 INLINE_RE = re.compile(r"(<sup>.*?</sup>|\*\*.+?\*\*|\*[^*]+?\*)")
 
 
@@ -37,7 +44,7 @@ def parse(md):
     for line in md.splitlines():
         m = SLIDE_RE.match(line)
         if m:
-            cur = {"title": m.group(1), "body": [], "notes": [], "visual": "", "flow": []}
+            cur = {"title": m.group(1), "body": [], "notes": [], "visual": "", "flow": [], "photos": []}
             slides.append(cur)
             in_notes = in_flow = False
             continue
@@ -62,6 +69,9 @@ def parse(md):
             in_notes = True
             if m.group(2):
                 cur["notes"].append(m.group(2))
+        elif (m := PHOTO_RE.match(line)):
+            what, _, source = m.group(2).partition("|")
+            cur["photos"].append((what.strip(), source.strip()))
         elif (m := VISUAL_RE.match(line)):
             cur["visual"] = m.group(1).strip()
         elif SOURCES_RE.match(line):
@@ -164,6 +174,42 @@ def draw_flow(slide, prs, chains):
         tree.insert(3, line._element)
 
 
+def draw_photo_slots(slide, prs, photos, full):
+    """Dashed empty boxes to paste book figures into, each with an editable caption below."""
+    W, H = prs.slide_width, prs.slide_height
+    x0 = Inches(0.8) if full else int(W * 0.56)
+    area_w = W - Inches(0.8) - x0 if full else W - Inches(0.5) - x0
+    top, area_h = Inches(1.7), H - Inches(1.9)
+    side_by_side = full and len(photos) == 2
+    for k, (what, source) in enumerate(photos):
+        if side_by_side:  # two slots next to each other on a photo-only slide
+            width, left, y, slot_h = (area_w - Inches(0.4)) / 2, x0 + k * (area_w + Inches(0.4)) / 2, top, area_h - Inches(0.75)
+        else:  # stacked in the right-hand column
+            each = area_h / len(photos)
+            width, left, y, slot_h = area_w, x0, top + each * k, each - Inches(0.75)
+        slot_h = int(slot_h)
+        box = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Emu(int(left)), Emu(int(y)), Emu(int(width)), Emu(slot_h))
+        box.name = "Photo slot"
+        box.fill.background()
+        box.line.color.rgb = RGBColor(0x99, 0x99, 0x99)
+        box.line.dash_style = MSO_LINE.DASH
+        box.line.width = Pt(1.5)
+        tf = box.text_frame
+        tf.word_wrap = True
+        tf.text = f"PHOTO SLOT\n{what}\n(delete this box and paste the figure)"
+        for p in tf.paragraphs:
+            p.alignment = PP_ALIGN.CENTER
+            for r in p.runs:
+                r.font.size, r.font.italic = Pt(14), True
+                r.font.color.rgb = RGBColor(0x77, 0x77, 0x77)
+        cap = slide.shapes.add_textbox(Emu(int(left)), Emu(int(y + slot_h + Inches(0.05))), Emu(int(width)), Inches(0.6))
+        cap.name = "Photo caption"
+        cap.text_frame.word_wrap = True
+        add_runs(cap.text_frame.paragraphs[0], f"{what}." + (f" Source: {source}" if source else ""))
+        for r in cap.text_frame.paragraphs[0].runs:
+            r.font.size = Pt(12)
+
+
 def place_16x9(slide, is_title):
     """The built-in layouts are drawn for 4:3, so position the placeholders for 16:9 by hand."""
     boxes = ([(0.9, 2.2, 11.5, 1.6), (0.9, 4.0, 11.5, 1.6)] if is_title
@@ -188,8 +234,22 @@ def build(slides, out, template=None):
             draw_flow(slide, prs, s["flow"])
         elif s["body"] and len(slide.placeholders) > 1:
             is_refs = re.match(r"(references|daftar pustaka|bibliography)", s["title"], re.I)
-            fill(slide.placeholders[1].text_frame, s["body"], 16 if is_refs else None)
+            body = slide.placeholders[1]
+            fill(body.text_frame, s["body"], 16 if is_refs else None)
+            if s["photos"]:
+                body.width = int(prs.slide_width * 0.53) - body.left
+                for p in body.text_frame.paragraphs:
+                    for r in p.runs:
+                        r.font.size = r.font.size or Pt(24)
+        elif len(slide.placeholders) > 1:
+            slide.placeholders[1]._element.getparent().remove(slide.placeholders[1]._element)
+        checks = [w for w, src in s["photos"] if CHECK in src]
+        if s["photos"] and not is_title:
+            photos = [(w, src.replace(CHECK, "").strip()) for w, src in s["photos"][:2]]
+            draw_photo_slots(slide, prs, photos, full=not s["body"] or bool(s["flow"]))
         notes = s["notes"]
+        if checks:  # keep the reminder off the slide, in the notes
+            notes = f"[Check in your book before presenting: {'; '.join(checks)}]\n\n{notes}".strip()
         if s["visual"] and s["visual"].lower() not in ("none", "-"):
             notes = f"[Visual: {s['visual']}]\n\n{notes}".strip()
         if notes:
